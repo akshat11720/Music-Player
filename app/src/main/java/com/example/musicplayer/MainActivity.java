@@ -72,18 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .check();
     }
-    // ye method humein ek folder mein se humko saari mp3 files return karke dega
     public ArrayList<File> fetchSongs(File file){
         ArrayList arrayList=new ArrayList();
         File []songs =file.listFiles();
-        //ye hamari saaari files ko list kar dega iss directory (file) ke andar jitni
-        //bhi files h unko list kar dega ab hum isme recursively jayenge aur iske andar ki saari ki saari files ko lekar
-        // aajyenge aur iss arrayList mein add kar denge
+     
         if(songs !=null){
             for( File myFile: songs) {
                 if (!myFile.isHidden() && myFile.isDirectory()) {
-                    arrayList.addAll(fetchSongs(myFile));//ye jo arraylist return karega uske andar jitne bhi
-                    //items h unn sabko iss arraylist mein add kar dega
+                    arrayList.addAll(fetchSongs(myFile));
                 } else {
                     if (myFile.getName().endsWith(".mp3") && !myFile.getName().startsWith(("."))) {
                         arrayList.add(myFile);
@@ -92,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
                }
             }
             return arrayList;
-            // saaari ki saari jo humne songs fetch kiye h yaanki ki saari ki saari files ya directory jo humne fetch
-            //kari h unko iterate karo
+          
         }
     }
 
