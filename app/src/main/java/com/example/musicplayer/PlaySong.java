@@ -18,18 +18,18 @@ public class PlaySong extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mediaPlayer.stop();//isse mediaplayer hamara ruk jayega
+        mediaPlayer.stop();
         mediaPlayer.release();
         updateSeek.interrupt();
     }
 
     TextView textView;
 ImageView play,previous,next;
-//we are making arraylist for the intents that are coming
+
     ArrayList<File> songs;
     MediaPlayer mediaPlayer;
-    String textContent;//name of music
-    int position;//position hamari intent se aayegi
+    String textContent;
+    int position;
     SeekBar seekBar;
     Thread updateSeek;
 
@@ -44,14 +44,14 @@ ImageView play,previous,next;
         seekBar=findViewById(R.id.seekBar);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
-                //bundle is a object
+             
         songs=(ArrayList) bundle.getParcelableArrayList("songList");
         textContent=intent.getStringExtra("currentSong");
         textView.setText(textContent);
         textView.setSelected(true);
         position=intent.getIntExtra("position",0);
         Uri uri=Uri.parse(songs.get(position).toString());
-        mediaPlayer=MediaPlayer.create(this,uri);//current song will play
+        mediaPlayer=MediaPlayer.create(this,uri);
         mediaPlayer.start();
         seekBar.setMax(mediaPlayer.getDuration());
 
@@ -68,7 +68,7 @@ ImageView play,previous,next;
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //jab user aage peeche karein tb kya ho
+                
 mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
@@ -111,7 +111,7 @@ mediaPlayer.seekTo(seekBar.getProgress());
              if(position!=0){
                  position=position-1;
              }
-             else{//if value of position is 0
+             else{
                  position=songs.size()-1;
              }
                 Uri uri=Uri.parse(songs.get(position).toString());
